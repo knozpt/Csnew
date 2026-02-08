@@ -132,7 +132,10 @@ h1, h2 {
   margin-top: 0;
   color: #ff9d00;
 }
-
+.card-images {
+  display: flex;
+  gap: 5px;
+}
 .card img {
   width: 100%;
   height: 250px;
@@ -228,14 +231,18 @@ function renderItems(map, type) {
   }
 
   itemsContainer.innerHTML = items.map(item => `
-    <div class="card">
-      <img src="${item.image}" alt="${item.name}">
-      <div class="card-content">
-        <h3>${item.name}</h3>
-        <p>${item.description}</p>
-      </div>
+  <div class="card">
+    <div class="card-images">
+      ${item.images.map(img => `
+        <img src="${img}" alt="${item.name}">
+      `).join('')}
     </div>
-  `).join('');
+    <div class="card-content">
+      <h3>${item.name}</h3>
+      <p>${item.description}</p>
+    </div>
+  </div>
+`).join('');
 }
 
 showHome();

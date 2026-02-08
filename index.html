@@ -1,243 +1,92 @@
 <!DOCTYPE html>
-<html lang="pt">
+<html>
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Spam CS2</title>
-
-<style>
-
-/* ===== BASE ===== */
-
-body {
-  margin: 0;
-  font-family: 'Segoe UI', sans-serif;
-  background: linear-gradient(135deg, #0f0f0f, #1a1a1a);
-  color: white;
-}
-
-h1, h2 {
-  text-align: center;
-  letter-spacing: 2px;
-}
-
-#app {
-  padding: 20px;
-}
-
-/* ===== HERO HOME ===== */
-
-.hero {
-  text-align: center;
-  padding: 60px 20px;
-}
-
-.hero h1 {
-  font-size: 3rem;
-  background: linear-gradient(90deg, #ff6600, #ff9d00);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-/* ===== MAP BUTTONS ===== */
-
-.map-container {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 20px;
-  margin-top: 40px;
-}
-
-.map-btn {
-  padding: 20px 40px;
-  font-size: 1.2rem;
-  background: #1f1f1f;
-  border: 2px solid #333;
-  border-radius: 12px;
-  cursor: pointer;
-  transition: 0.3s ease;
-}
-
-.map-btn:hover {
-  transform: translateY(-5px);
-  border-color: #ff6600;
-  box-shadow: 0 0 15px #ff660055;
-}
-
-/* ===== TABS ===== */
-
-.tabs {
-  display: flex;
-  justify-content: center;
-  gap: 15px;
-  margin: 30px 0;
-}
-
-.tab {
-  padding: 12px 25px;
-  border-radius: 8px;
-  cursor: pointer;
-  background: #1c1c1c;
-  transition: 0.3s;
-  font-weight: 600;
-}
-
-.tab:hover {
-  background: #292929;
-}
-
-.tab.active {
-  background: linear-gradient(90deg, #ff6600, #ff9d00);
-  color: black;
-}
-
-/* ===== ITEMS GRID ===== */
-
-.items {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 20px;
-  max-width: 1100px;
-  margin: auto;
-}
-
-/* ===== CARD ===== */
-
-.card {
-  background: #1a1a1a;
-  border-radius: 12px;
-  overflow: hidden;
-  transition: 0.3s;
-  border: 1px solid #2a2a2a;
-}
-
-.card:hover {
-  transform: scale(1.03);
-  box-shadow: 0 0 20px #ff660033;
-}
-
-.card-content {
-  padding: 15px;
-}
-
-.card h3 {
-  margin-top: 0;
-  color: #ff9d00;
-}
-
-.card img {
-  width: 100%;
-  height: 180px;
-  object-fit: cover;
-}
-
-/* ===== BACK BUTTON ===== */
-
-.back-btn {
-  margin-top: 40px;
-  text-align: center;
-  cursor: pointer;
-  font-weight: bold;
-  color: #ff6600;
-  transition: 0.3s;
-}
-
-.back-btn:hover {
-  letter-spacing: 2px;
-}
-
-/* ===== RESPONSIVE ===== */
-
-@media (max-width: 600px) {
-  .hero h1 {
-    font-size: 2rem;
-  }
-}
-
-</style>
+  <meta charset="UTF-8">
+  <title>Spam CS2</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; }
+    .map-btn { margin: 5px; padding: 10px; cursor: pointer; background: #444; color: white; border-radius: 5px; }
+    .tab { margin: 10px; cursor: pointer; display: inline-block; }
+    .item-card { border: 1px solid #ddd; padding: 10px; margin: 10px 0; }
+    img { max-width: 100%; height: auto; }
+  </style>
 </head>
 <body>
 
-<div id="app"></div>
+<div id="main"></div>
 
 <script>
+fetch('data.json') // -> JSON com mapas/itens
+  .then(res => res.json())
+  .then(data => {
+    const main = document.getElementById('main');
 
-fetch("data.json")
-.then(res => res.json())
-.then(data => {
+    // Página Inicial
+    function showHome() {
+      main.innerHTML = '<h1>Spam CS2</h1>';
+      Object.keys(data.maps).forEach(mapName => {
+        const btn = document.createElement('div');
+        btn.textContent = mapName.charAt(0).toUpperCase() + mapName.slice(1);
+        btn.className = 'map-btn';
+        btn.onclick = () => showMap(mapName);
+        main.appendChild(btn);
+      });
+    }
 
-const app = document.getElementById("app");
+    // Página de cada mapa
+    function showMap(map) {
+      main.innerHTML = `<h2>${map.charAt(0).toUpperCase() + map.slice(1)}</h2>`;
+      const tabs = ['smokes','flash','molotov'];
 
-function showHome() {
-  app.innerHTML = `
-    <div class="hero">
-      <h1>SPAM CS2</h1>
-      <p>Smokes • Flash • Molotov</p>
-    </div>
-    <div class="map-container">
-      ${Object.keys(data.maps).map(map => 
-        `<div class="map-btn" onclick="showMap('${map}')">
-          ${map.toUpperCase()}
-        </div>`
-      ).join('')}
-    </div>
-  `;
-}
+      tabs.forEach(type => {
+        const tab = document.createElement('span');
+        tab.textContent = type.charAt(0).toUpperCase() + type.slice(1);
+        tab.className = 'tab';
+        tab.onclick = () => showItems(map, type);
+        main.appendChild(tab);
+      });
 
-window.showMap = function(map) {
+      const back = document.createElement('div');
+      back.textContent = '← Voltar';
+      back.style.color = 'blue';
+      back.style.cursor = 'pointer';
+      back.onclick = showHome;
+      main.appendChild(back);
+      
+      // start with smokes
+      showItems(map, 'smokes');
+    }
 
-  app.innerHTML = `
-    <h2>${map.toUpperCase()}</h2>
-    <div class="tabs">
-      <div class="tab active" onclick="changeTab('${map}','smokes', this)">Smokes</div>
-      <div class="tab" onclick="changeTab('${map}','flash', this)">Flash</div>
-      <div class="tab" onclick="changeTab('${map}','molotov', this)">Molotov</div>
-    </div>
-    <div class="items" id="items"></div>
-    <div class="back-btn" onclick="showHome()">← Voltar aos mapas</div>
-  `;
+    // Mostra itens do tipo
+    function showItems(map, type) {
+      const section = document.createElement('div');
+      section.innerHTML = '';
+      const items = data.maps[map][type];
 
-  renderItems(map, "smokes");
-}
+      items.forEach(obj => {
+        const card = document.createElement('div');
+        card.className = 'item-card';
+        card.innerHTML = `
+          <h3>${obj.name}</h3>
+          <p>${obj.description}</p>
+          <img src="${obj.image}" alt="${obj.name}">
+        `;
+        section.appendChild(card);
+      });
 
-window.changeTab = function(map, type, element) {
+      const existing = document.querySelector('.items-section');
+      if (existing) existing.remove();
 
-  document.querySelectorAll(".tab").forEach(tab => tab.classList.remove("active"));
-  element.classList.add("active");
+      section.className = 'items-section';
+      main.appendChild(section);
+    }
 
-  renderItems(map, type);
-}
-
-function renderItems(map, type) {
-
-  const itemsContainer = document.getElementById("items");
-  const items = data.maps[map][type];
-
-  if (!items || items.length === 0) {
-    itemsContainer.innerHTML = "<p style='text-align:center;'>Nenhum conteúdo ainda.</p>";
-    return;
-  }
-
-  itemsContainer.innerHTML = items.map(item => `
-    <div class="card">
-      <img src="${item.image}" alt="${item.name}">
-      <div class="card-content">
-        <h3>${item.name}</h3>
-        <p>${item.description}</p>
-      </div>
-    </div>
-  `).join('');
-}
-
-showHome();
-
-})
-.catch(err => {
-  document.getElementById("app").innerHTML = "Erro ao carregar JSON.";
-  console.error(err);
-});
-
+    showHome();
+  })
+  .catch(err => {
+    console.error(err);
+    document.getElementById('main').textContent = 'Erro a carregar dados.';
+  });
 </script>
 
 </body>

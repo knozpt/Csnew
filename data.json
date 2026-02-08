@@ -3,27 +3,32 @@
     "inferno": {
       "smokes": [
         {
-  "name": "Banana Smoke",
-  "description": "Smoke para bloquear visão da banana",
-  "image": "https://dc628.4shared.com/img/r7dHWXHZfa/s24/19bfd1dac78/smokes2?async&rand=0.44619064369548633"
-}
+        "name": "Banana Smoke",
+        "description": "Smoke para bloquear visão da banana",
+        "image": "https://dc628.4shared.com/img/r7dHWXHZfa/s24/19bfd1dac78/smokes2?async&rand=0.44619064369548633"
+      },
+      {
+        "name": "CT Smoke",
+        "description": "Smoke para cortar rotação do CT",
+        "image": ""
+      }
       ],
-      "flash": [],
+      "flash": [{
+        "name": "connct",
+        "description": "",
+        "image": ""
+      },
+      {
+        "name": "conn",
+        "description": "",
+        "image": ""
+      }
+    ],
       "molotov": []
     },
     "mirage": {
-      "smokes": [
-        {
-  "name": "CT Smoke",
-  "description": "Smoke para bloquear visão da banana",
-  "image": "https://wallpapers.com/images/featured-full/imagens-muito-legais-40it5k0y58kfe71d.jpg"
-}
-      ],
-      "flash": [{
-  "name": "Banana Smoke",
-  "description": "Smoke para bloquear visão da banana",
-  "image": "https://dc628.4shared.com/img/r7dHWXHZfa/s24/19bfd1dac78/smokes2?async&rand=0.44619064369548633"
-}],
+      "smokes": [],
+      "flash": [],
       "molotov": []
     },
     "d2": {

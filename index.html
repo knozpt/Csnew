@@ -97,18 +97,22 @@ fetch("data.json")
 
 const app = document.getElementById("app");
 
-function showHome() {
+window.showHome = function() {
   app.innerHTML = `
-    <h1>Spam CS2</h1>
+    <div class="hero">
+      <h1>SPAM CS2</h1>
+      <p>Smokes • Flash • Molotov</p>
+    </div>
     <div class="map-container">
-      ${Object.keys(data.maps).map(map => 
-        `<div class="map-btn" onclick="showMap('${map}')">
-          ${map.toUpperCase()}
+      ${Object.keys(data.maps).map(m => 
+        `<div class="map-btn" onclick="showMap('${m}')">
+          ${m.toUpperCase()}
         </div>`
       ).join('')}
     </div>
   `;
 }
+
 
 window.showMap = function(map) {
 

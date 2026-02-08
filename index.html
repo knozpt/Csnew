@@ -99,7 +99,10 @@ const app = document.getElementById("app");
 
 window.showHome = function() {
   app.innerHTML = `
-    <h1>Spam CS2</h1>
+    <div class="hero">
+      <h1>SPAM CS2</h1>
+      <p>Smokes • Flash • Molotov</p>
+    </div>
     <div class="map-container">
       ${Object.keys(data.maps).map(m => 
         `<div class="map-btn" onclick="showMap('${m}')">
@@ -109,6 +112,7 @@ window.showHome = function() {
     </div>
   `;
 }
+
 
 
 window.showMap = function(map) {

@@ -1,161 +1,89 @@
 <!DOCTYPE html>
-<html lang="pt">
+<html>
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Spam CS2</title>
 
 <style>
-
-/* ===== BASE ===== */
-
 body {
-  margin: 0;
-  font-family: 'Segoe UI', sans-serif;
-  background: linear-gradient(135deg, #0f0f0f, #1a1a1a);
+  font-family: Arial, sans-serif;
+  background-color: #0f0f0f;
   color: white;
+  margin: 0;
+  padding: 20px;
 }
 
 h1, h2 {
   text-align: center;
-  letter-spacing: 2px;
 }
-
-#app {
-  padding: 20px;
-}
-
-/* ===== HERO HOME ===== */
-
-.hero {
-  text-align: center;
-  padding: 60px 20px;
-}
-
-.hero h1 {
-  font-size: 3rem;
-  background: linear-gradient(90deg, #ff6600, #ff9d00);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-/* ===== MAP BUTTONS ===== */
 
 .map-container {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 20px;
+  text-align: center;
   margin-top: 40px;
 }
 
 .map-btn {
-  padding: 20px 40px;
-  font-size: 1.2rem;
+  display: inline-block;
+  padding: 15px 30px;
+  margin: 10px;
   background: #1f1f1f;
-  border: 2px solid #333;
-  border-radius: 12px;
+  border: 1px solid #333;
+  border-radius: 8px;
   cursor: pointer;
-  transition: 0.3s ease;
+  transition: 0.3s;
 }
 
 .map-btn:hover {
-  transform: translateY(-5px);
-  border-color: #ff6600;
-  box-shadow: 0 0 15px #ff660055;
+  background: #ff6600;
 }
-
-/* ===== TABS ===== */
 
 .tabs {
   display: flex;
   justify-content: center;
-  gap: 15px;
-  margin: 30px 0;
+  margin: 20px 0;
 }
 
 .tab {
-  padding: 12px 25px;
-  border-radius: 8px;
+  padding: 10px 20px;
+  margin: 0 5px;
   cursor: pointer;
-  background: #1c1c1c;
+  background: #1f1f1f;
+  border-radius: 5px;
   transition: 0.3s;
-  font-weight: 600;
-}
-
-.tab:hover {
-  background: #292929;
 }
 
 .tab.active {
-  background: linear-gradient(90deg, #ff6600, #ff9d00);
-  color: black;
+  background: #ff6600;
 }
 
-/* ===== ITEMS GRID ===== */
-
 .items {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 20px;
-  max-width: 1100px;
+  max-width: 900px;
   margin: auto;
 }
 
-/* ===== CARD ===== */
-
 .card {
   background: #1a1a1a;
-  border-radius: 12px;
-  overflow: hidden;
-  transition: 0.3s;
-  border: 1px solid #2a2a2a;
-}
-
-.card:hover {
-  transform: scale(1.03);
-  box-shadow: 0 0 20px #ff660033;
-}
-
-.card-content {
   padding: 15px;
-}
-
-.card h3 {
-  margin-top: 0;
-  color: #ff9d00;
+  margin-bottom: 20px;
+  border-radius: 8px;
+  border: 1px solid #333;
 }
 
 .card img {
   width: 100%;
-  height: 180px;
-  object-fit: cover;
+  border-radius: 6px;
+  margin-top: 10px;
 }
-
-/* ===== BACK BUTTON ===== */
 
 .back-btn {
-  margin-top: 40px;
-  text-align: center;
   cursor: pointer;
-  font-weight: bold;
+  margin-top: 20px;
+  display: block;
+  text-align: center;
   color: #ff6600;
-  transition: 0.3s;
 }
-
-.back-btn:hover {
-  letter-spacing: 2px;
-}
-
-/* ===== RESPONSIVE ===== */
-
-@media (max-width: 600px) {
-  .hero h1 {
-    font-size: 2rem;
-  }
-}
-
 </style>
+
 </head>
 <body>
 
@@ -171,10 +99,7 @@ const app = document.getElementById("app");
 
 function showHome() {
   app.innerHTML = `
-    <div class="hero">
-      <h1>SPAM CS2</h1>
-      <p>Smokes • Flash • Molotov</p>
-    </div>
+    <h1>Spam CS2</h1>
     <div class="map-container">
       ${Object.keys(data.maps).map(map => 
         `<div class="map-btn" onclick="showMap('${map}')">
@@ -195,7 +120,7 @@ window.showMap = function(map) {
       <div class="tab" onclick="changeTab('${map}','molotov', this)">Molotov</div>
     </div>
     <div class="items" id="items"></div>
-    <div class="back-btn" onclick="showHome()">← Voltar aos mapas</div>
+    <div class="back-btn" onclick="showHome()">← Voltar</div>
   `;
 
   renderItems(map, "smokes");
@@ -215,17 +140,15 @@ function renderItems(map, type) {
   const items = data.maps[map][type];
 
   if (!items || items.length === 0) {
-    itemsContainer.innerHTML = "<p style='text-align:center;'>Nenhum conteúdo ainda.</p>";
+    itemsContainer.innerHTML = "<p>Nenhum conteúdo ainda.</p>";
     return;
   }
 
   itemsContainer.innerHTML = items.map(item => `
     <div class="card">
+      <h3>${item.name}</h3>
+      <p>${item.description}</p>
       <img src="${item.image}" alt="${item.name}">
-      <div class="card-content">
-        <h3>${item.name}</h3>
-        <p>${item.description}</p>
-      </div>
     </div>
   `).join('');
 }

@@ -1,0 +1,26 @@
+{
+  "maps": {
+    "inferno": {
+      "smokes": [
+        {
+  "name": "Banana Smoke",
+  "description": "Smoke para bloquear visão da banana",
+  "image": "https://dc628.4shared.com/img/r7dHWXHZfa/s24/19bfd1dac78/smokes2?async&rand=0.44619064369548633"
+}
+
+      ],
+      "flash": [],
+      "molotov": []
+    },
+    "mirage": {
+      "smokes": [],
+      "flash": [],
+      "molotov": []
+    },
+    "d2": {
+      "smokes": [],
+      "flash": [],
+      "molotov": []
+    }
+  }
+}

@@ -78,6 +78,9 @@ h1 { margin-top:50px; font-size:3rem; text-shadow:2px 2px 5px #000; }
 <div class="map-container" id="maps"></div>
 
 <script>
+fetch("data.json")
+.then(res => res.json())
+.then(data => {
 Object.keys(data.maps).forEach(map => {
   const card = document.createElement('div');
   card.className = 'map-card';
@@ -94,6 +97,7 @@ Object.keys(data.maps).forEach(map => {
     </div>
   `;
   container.appendChild(card);
+});
 });
 </script>
 </body>

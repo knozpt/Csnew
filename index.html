@@ -230,20 +230,25 @@ function renderItems(map, type) {
     return;
   }
 
-  itemsContainer.innerHTML = items.map(item => `
-  <div class="card">
-    <div class="card-images">
-      ${item.images.map(img => `
-        <img src="${img}" alt="${item.name}">
-      `).join('')}
-    </div>
-    <div class="card-content">
-      <h3>${item.name}</h3>
-      <p>${item.description}</p>
-    </div>
-  </div>
-`).join('');
-}
+itemsContainer.innerHTML = items.map(item => {
+
+  let imagesHTML = "";
+
+  if (Array.isArray(item.image)) {
+    imagesHTML = `
+      <div class="card-images">
+        ${item.image.map(img => `
+          <img src="${img}" alt="${item.name}">
+        `).join('')}
+      </div>
+    `;
+  } else if (item.image) {
+    imagesHTML = `
+      <div class="card-images">
+        <img src="${item.image}" alt="${item.name}">
+      </div>
+    `;
+  }
 
 showHome();
 

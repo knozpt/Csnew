@@ -132,23 +132,14 @@ h1, h2 {
   margin-top: 0;
   color: #ff9d00;
 }
-
 .card-images {
   display: flex;
   gap: 5px;
 }
-
-.card-images img {
-  width: 100%;
+.card img {
+  width: 50%;
   height: 250px;
   object-fit: cover;
-  border-bottom: 1px solid #2a2a2a;
-}
-.card-images img:only-child {
-  width: 100%;
-}
-.card-images img:not(:only-child) {
-  width: 50%;
 }
 
 /* ===== BACK BUTTON ===== */
@@ -239,31 +230,25 @@ function renderItems(map, type) {
     return;
   }
 
-  itemsContainer.innerHTML = items.map(item => {
+itemsContainer.innerHTML = items.map(item => {
 
-    let imagesHTML = "";
+  let imagesHTML = "";
 
-    if (item.images && item.images.length > 0) {
-      imagesHTML = `
-        <div class="card-images">
-          ${item.images.map(img => `
-            <img src="${img}" alt="${item.name}">
-          `).join('')}
-        </div>
-      `;
-    }
-
-    return `
-      <div class="card">
-        ${imagesHTML}
-        <div class="card-content">
-          <h3>${item.name}</h3>
-          <p>${item.description}</p>
-        </div>
+  if (Array.isArray(item.image)) {
+    imagesHTML = `
+      <div class="card-images">
+        ${item.image.map(img => `
+          <img src="${img}" alt="${item.name}">
+        `).join('')}
       </div>
     `;
-  }).join('');
-}
+  } else if (item.image) {
+    imagesHTML = `
+      <div class="card-images">
+        <img src="${item.image}" alt="${item.name}">
+      </div>
+    `;
+  }
 
 showHome();
 

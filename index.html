@@ -44,6 +44,23 @@ h1 { margin-top:50px; font-size:3rem; text-shadow:2px 2px 5px #000; }
   box-shadow: 0 0 20px #ff9d00;
 }
 
+/* IMAGEM DO MAPA */
+.map-card img.map-img {
+  width: 100%;
+  height: 120px;
+  object-fit: cover;
+  cursor: pointer;
+  transition: transform 0.5s ease;
+  border-bottom: 2px solid #333;
+}
+
+/* ZOOM AO CLICAR */
+.map-card img.map-img.zoomed {
+  transform: scale(1.5);
+  z-index: 10;
+  position: relative;
+}
+
 /* NOME DO MAPA */
 .map-card h2 {
   margin:10px 0;
@@ -65,8 +82,6 @@ h1 { margin-top:50px; font-size:3rem; text-shadow:2px 2px 5px #000; }
   font-weight:bold;
   transition:0.3s;
 }
-
-/* CT e TR cores diferentes */
 .side-buttons .ct { background:#1e90ff; color:#000; }
 .side-buttons .ct:hover { opacity:0.8; }
 .side-buttons .tr { background:#ff9d00; color:#fff; }
@@ -83,9 +98,11 @@ fetch("data.json")
 .then(data => {
   const container = document.getElementById("maps");
   Object.keys(data.maps).forEach(map => {
+    const mapData = data.maps[map];
     const card = document.createElement('div');
     card.className = 'map-card';
     card.innerHTML = `
+      <img src="${mapData.img}" alt="${map}" class="map-img">
       <h2>${map.toUpperCase()}</h2>
       <div class="side-buttons">
         <button class="tr" onclick="window.location='tr.html?map=${map}'">TR</button>
@@ -94,6 +111,13 @@ fetch("data.json")
     `;
     container.appendChild(card);
   });
+});
+
+// Zoom ao clicar na imagem
+document.addEventListener('click', function(e) {
+  if (e.target.classList.contains('map-img')) {
+    e.target.classList.toggle('zoomed');
+  }
 });
 </script>
 </body>

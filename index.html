@@ -108,8 +108,13 @@ h1, h2 {
   box-shadow: 0 0 20px #ff660033;
 }
 
-.card img {
-  width: 100%;
+.card-images {
+  display: flex;
+  gap: 5px;
+}
+
+.card-images img {
+  width: 50%;
   height: 250px;
   object-fit: cover;
   cursor: pointer;
@@ -131,7 +136,6 @@ h1, h2 {
   justify-content: center;
   align-items: center;
   z-index: 999;
-  overflow: hidden;
 }
 
 .image-modal img {
@@ -139,7 +143,6 @@ h1, h2 {
   max-height: 90%;
   border-radius: 12px;
   transition: transform 0.2s ease;
-  cursor: grab;
 }
 
 .close-btn {
@@ -147,9 +150,20 @@ h1, h2 {
   top: 20px;
   right: 30px;
   font-size: 2rem;
-  color: white;
   cursor: pointer;
 }
+
+.arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 3rem;
+  cursor: pointer;
+  user-select: none;
+}
+
+.arrow.left { left: 30px; }
+.arrow.right { right: 30px; }
 
 .back-btn {
   margin-top: 40px;
@@ -166,36 +180,43 @@ h1, h2 {
 
 <div class="image-modal" id="imageModal">
   <span class="close-btn" onclick="closeModal()">✕</span>
+  <span class="arrow left" onclick="changeImage(-1)">❮</span>
   <img id="modalImg">
+  <span class="arrow right" onclick="changeImage(1)">❯</span>
 </div>
 
 <script>
+let dataGlobal;
+let currentImages = [];
+let currentIndex = 0;
 let scale = 1;
-let startY = 0;
 
 fetch("data.json")
 .then(res => res.json())
 .then(data => {
+  dataGlobal = data;
+  showHome();
+});
 
-const app = document.getElementById("app");
-
-window.showHome = function() {
+function showHome() {
+  const app = document.getElementById("app");
   app.innerHTML = `
     <div class="hero">
       <h1>SPAM CS2</h1>
       <p>Smokes • Flash • Molotov</p>
     </div>
     <div class="map-container">
-      ${Object.keys(data.maps).map(map =>
+      ${Object.keys(dataGlobal.maps).map(map =>
         `<div class="map-btn" onclick="showMap('${map}')">${map.toUpperCase()}</div>`
       ).join('')}
     </div>
   `;
 }
 
-window.showMap = function(map) {
+function showMap(map) {
+  const app = document.getElementById("app");
   app.innerHTML = `
-    <h2>${map.toUpperCase()}</h2>
+    <h2>${map}</h2>
     <div class="tabs">
       <div class="tab active" onclick="changeTab('${map}','smokes', this)">Smokes</div>
       <div class="tab" onclick="changeTab('${map}','flash', this)">Flash</div>
@@ -207,7 +228,7 @@ window.showMap = function(map) {
   renderItems(map, "smokes");
 }
 
-window.changeTab = function(map, type, el) {
+function changeTab(map, type, el) {
   document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
   el.classList.add("active");
   renderItems(map, type);
@@ -215,16 +236,20 @@ window.changeTab = function(map, type, el) {
 
 function renderItems(map, type) {
   const container = document.getElementById("items");
-  const items = data.maps[map][type];
+  const items = dataGlobal.maps[map][type];
 
   if (!items || items.length === 0) {
     container.innerHTML = "<p style='text-align:center;'>Nenhum conteúdo ainda.</p>";
     return;
   }
 
-  container.innerHTML = items.map(item => `
+  container.innerHTML = items.map((item, i) => `
     <div class="card">
-      <img src="${item.image}" onclick="openModal('${item.image}')">
+      <div class="card-images">
+        ${item.images.map((img, j) => `
+          <img src="${img}" onclick="openModal(${i}, ${j}, '${map}', '${type}')">
+        `).join('')}
+      </div>
       <div class="card-content">
         <h3>${item.name}</h3>
         <p>${item.description}</p>
@@ -233,56 +258,57 @@ function renderItems(map, type) {
   `).join('');
 }
 
-showHome();
-});
+function openModal(itemIndex, imageIndex, map, type) {
+  currentImages = dataGlobal.maps[map][type][itemIndex].images;
+  currentIndex = imageIndex;
 
-/* MODAL FUNCTIONS */
-const modal = document.getElementById("imageModal");
-const modalImg = document.getElementById("modalImg");
+  const modal = document.getElementById("imageModal");
+  const modalImg = document.getElementById("modalImg");
 
-window.openModal = function(src) {
   modal.style.display = "flex";
-  modalImg.src = src;
+  modalImg.src = currentImages[currentIndex];
   scale = 1;
   modalImg.style.transform = "scale(1)";
 }
 
-window.closeModal = function() {
-  modal.style.display = "none";
+function closeModal() {
+  document.getElementById("imageModal").style.display = "none";
 }
 
-/* ESC to close */
-document.addEventListener("keydown", e => {
-  if (e.key === "Escape") closeModal();
-});
+function changeImage(direction) {
+  currentIndex += direction;
+  if (currentIndex < 0) currentIndex = currentImages.length - 1;
+  if (currentIndex >= currentImages.length) currentIndex = 0;
+  document.getElementById("modalImg").src = currentImages[currentIndex];
+}
 
-/* Click outside to close */
-modal.addEventListener("click", e => {
-  if (e.target === modal) closeModal();
+/* ESC + Teclas */
+document.addEventListener("keydown", e => {
+  const modal = document.getElementById("imageModal");
+  if (modal.style.display === "flex") {
+    if (e.key === "Escape") closeModal();
+    if (e.key === "ArrowRight") changeImage(1);
+    if (e.key === "ArrowLeft") changeImage(-1);
+  }
 });
 
 /* Scroll zoom */
-modalImg.addEventListener("wheel", e => {
+document.getElementById("modalImg").addEventListener("wheel", e => {
   e.preventDefault();
   scale += e.deltaY * -0.001;
   scale = Math.min(Math.max(1, scale), 4);
-  modalImg.style.transform = `scale(${scale})`;
+  e.target.style.transform = `scale(${scale})`;
 });
 
 /* Double click reset */
-modalImg.addEventListener("dblclick", () => {
+document.getElementById("modalImg").addEventListener("dblclick", e => {
   scale = 1;
-  modalImg.style.transform = "scale(1)";
+  e.target.style.transform = "scale(1)";
 });
 
-/* Swipe down to close (mobile) */
-modal.addEventListener("touchstart", e => {
-  startY = e.touches[0].clientY;
-});
-
-modal.addEventListener("touchend", e => {
-  let endY = e.changedTouches[0].clientY;
-  if (endY - startY > 100) closeModal();
+/* Click fora fecha */
+document.getElementById("imageModal").addEventListener("click", e => {
+  if (e.target.id === "imageModal") closeModal();
 });
 </script>
 

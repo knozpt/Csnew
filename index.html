@@ -6,14 +6,11 @@
 <title>Spam CS2</title>
 
 <style>
-
-/* ===== BASE ===== */
-
 body {
   margin: 0;
   font-family: 'Segoe UI', sans-serif;
   background: linear-gradient(135deg, #0f0f0f, #1a1a1a);
-  color: rgb(255, 255, 255);
+  color: #fff;
 }
 
 h1, h2 {
@@ -21,23 +18,18 @@ h1, h2 {
   letter-spacing: 2px;
 }
 
-#app {
-  padding: 20px;
-}
+#app { padding: 20px; }
 
-/* ===== HERO HOME ===== */
-
+/* HERO */
 .hero {
   text-align: center;
   padding: 120px 20px;
-  background: 
+  background:
     linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)),
-    url("https://dc628.4shared.com/img/BBRLO7Irge/s24/19bfd1da890/smoke1?async&rand=0.8518840764480163");
+    url("https://dc628.4shared.com/img/BBRLO7Irge/s24/19bfd1da890/smoke1?async");
   background-size: cover;
   background-position: center;
-  background-repeat: no-repeat;
 }
-
 
 .hero h1 {
   font-size: 3rem;
@@ -46,8 +38,7 @@ h1, h2 {
   -webkit-text-fill-color: transparent;
 }
 
-/* ===== MAP BUTTONS ===== */
-
+/* MAP BUTTONS */
 .map-container {
   display: flex;
   justify-content: center;
@@ -72,8 +63,7 @@ h1, h2 {
   box-shadow: 0 0 15px #ff660055;
 }
 
-/* ===== TABS ===== */
-
+/* TABS */
 .tabs {
   display: flex;
   justify-content: center;
@@ -86,12 +76,8 @@ h1, h2 {
   border-radius: 8px;
   cursor: pointer;
   background: #1c1c1c;
-  transition: 0.3s;
   font-weight: 600;
-}
-
-.tab:hover {
-  background: #292929;
+  transition: 0.3s;
 }
 
 .tab.active {
@@ -99,8 +85,7 @@ h1, h2 {
   color: black;
 }
 
-/* ===== ITEMS GRID ===== */
-
+/* GRID */
 .items {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -109,14 +94,13 @@ h1, h2 {
   margin: auto;
 }
 
-/* ===== CARD ===== */
-
+/* CARD */
 .card {
   background: #1a1a1a;
   border-radius: 12px;
   overflow: hidden;
-  transition: 0.3s;
   border: 1px solid #2a2a2a;
+  transition: 0.3s;
 }
 
 .card:hover {
@@ -124,21 +108,48 @@ h1, h2 {
   box-shadow: 0 0 20px #ff660033;
 }
 
-.card-content {
-  padding: 15px;
+.card img {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+  cursor: pointer;
 }
+
+.card-content { padding: 15px; }
 
 .card h3 {
   margin-top: 0;
   color: #ff9d00;
 }
-.card img {
-  width: 100%;
-  height: 250px;
-  object-fit: cover;
+
+/* MODAL */
+.image-modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.95);
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+  overflow: hidden;
 }
 
-/* ===== BACK BUTTON ===== */
+.image-modal img {
+  max-width: 90%;
+  max-height: 90%;
+  border-radius: 12px;
+  transition: transform 0.2s ease;
+  cursor: grab;
+}
+
+.close-btn {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  font-size: 2rem;
+  color: white;
+  cursor: pointer;
+}
 
 .back-btn {
   margin-top: 40px;
@@ -146,28 +157,21 @@ h1, h2 {
   cursor: pointer;
   font-weight: bold;
   color: #ff6600;
-  transition: 0.3s;
 }
-
-.back-btn:hover {
-  letter-spacing: 2px;
-}
-
-/* ===== RESPONSIVE ===== */
-
-@media (max-width: 600px) {
-  .hero h1 {
-    font-size: 2rem;
-  }
-}
-
 </style>
 </head>
 <body>
 
 <div id="app"></div>
 
+<div class="image-modal" id="imageModal">
+  <span class="close-btn" onclick="closeModal()">✕</span>
+  <img id="modalImg">
+</div>
+
 <script>
+let scale = 1;
+let startY = 0;
 
 fetch("data.json")
 .then(res => res.json())
@@ -182,18 +186,14 @@ window.showHome = function() {
       <p>Smokes • Flash • Molotov</p>
     </div>
     <div class="map-container">
-      ${Object.keys(data.maps).map(map => 
-        `<div class="map-btn" onclick="showMap('${map}')">
-          ${map.toUpperCase()}
-        </div>`
+      ${Object.keys(data.maps).map(map =>
+        `<div class="map-btn" onclick="showMap('${map}')">${map.toUpperCase()}</div>`
       ).join('')}
     </div>
   `;
 }
 
-
 window.showMap = function(map) {
-
   app.innerHTML = `
     <h2>${map.toUpperCase()}</h2>
     <div class="tabs">
@@ -202,33 +202,29 @@ window.showMap = function(map) {
       <div class="tab" onclick="changeTab('${map}','molotov', this)">Molotov</div>
     </div>
     <div class="items" id="items"></div>
-    <div class="back-btn" onclick="showHome()">← Voltar aos mapas</div>
+    <div class="back-btn" onclick="showHome()">← Voltar</div>
   `;
-
   renderItems(map, "smokes");
 }
 
-window.changeTab = function(map, type, element) {
-
-  document.querySelectorAll(".tab").forEach(tab => tab.classList.remove("active"));
-  element.classList.add("active");
-
+window.changeTab = function(map, type, el) {
+  document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
+  el.classList.add("active");
   renderItems(map, type);
 }
 
 function renderItems(map, type) {
-
-  const itemsContainer = document.getElementById("items");
+  const container = document.getElementById("items");
   const items = data.maps[map][type];
 
   if (!items || items.length === 0) {
-    itemsContainer.innerHTML = "<p style='text-align:center;'>Nenhum conteúdo ainda.</p>";
+    container.innerHTML = "<p style='text-align:center;'>Nenhum conteúdo ainda.</p>";
     return;
   }
 
-itemsContainer.innerHTML = items.map(item => `
+  container.innerHTML = items.map(item => `
     <div class="card">
-      <img src="${item.image}" alt="${item.name}">
+      <img src="${item.image}" onclick="openModal('${item.image}')">
       <div class="card-content">
         <h3>${item.name}</h3>
         <p>${item.description}</p>
@@ -238,13 +234,56 @@ itemsContainer.innerHTML = items.map(item => `
 }
 
 showHome();
-
-})
-.catch(err => {
-  document.getElementById("app").innerHTML = "Erro ao carregar JSON.";
-  console.error(err);
 });
 
+/* MODAL FUNCTIONS */
+const modal = document.getElementById("imageModal");
+const modalImg = document.getElementById("modalImg");
+
+window.openModal = function(src) {
+  modal.style.display = "flex";
+  modalImg.src = src;
+  scale = 1;
+  modalImg.style.transform = "scale(1)";
+}
+
+window.closeModal = function() {
+  modal.style.display = "none";
+}
+
+/* ESC to close */
+document.addEventListener("keydown", e => {
+  if (e.key === "Escape") closeModal();
+});
+
+/* Click outside to close */
+modal.addEventListener("click", e => {
+  if (e.target === modal) closeModal();
+});
+
+/* Scroll zoom */
+modalImg.addEventListener("wheel", e => {
+  e.preventDefault();
+  scale += e.deltaY * -0.001;
+  scale = Math.min(Math.max(1, scale), 4);
+  modalImg.style.transform = `scale(${scale})`;
+});
+
+/* Double click reset */
+modalImg.addEventListener("dblclick", () => {
+  scale = 1;
+  modalImg.style.transform = "scale(1)";
+});
+
+/* Swipe down to close (mobile) */
+modal.addEventListener("touchstart", e => {
+  startY = e.touches[0].clientY;
+});
+
+modal.addEventListener("touchend", e => {
+  let endY = e.changedTouches[0].clientY;
+  if (endY - startY > 100) closeModal();
+});
 </script>
 
 </body>

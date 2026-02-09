@@ -1,0 +1,19 @@
+{
+  "maps": {
+    "dust2": {
+      "image": "https://cdn.fastly.steamstatic.com/apps/csgo/images/csgo_react//cs2/header_ctt.png"
+    },
+    "mirage": {
+      "image": "https://i.imgur.com/mirage.jpg"
+    },
+    "inferno": {
+      "image": "https://i.imgur.com/inferno.jpg"
+    },
+    "nuke": {
+      "image": "https://i.imgur.com/nuke.jpg"
+    },
+    "vertigo": {
+      "image": "https://i.imgur.com/vertigo.jpg"
+    }
+  }
+}

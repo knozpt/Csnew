@@ -30,32 +30,43 @@ h1 { margin-top:50px; font-size:3rem; text-shadow:2px 2px 5px #000; }
 
 /* CARD DE MAPA */
 .map-card {
-  background: rgba(30,30,30,0.8);
+  position: relative;
+  width:200px;
+  height:250px;
   border-radius:15px;
   overflow:hidden;
-  width:200px;
   transition: transform 0.3s, box-shadow 0.3s;
   border:2px solid #333;
+  background-size: cover;
+  background-position: center;
 }
 
-/* HOVER NO CARD */
-.map-card:hover {
-  transform: translateY(-8px) scale(1.05);
-  box-shadow: 0 0 20px #ff9d00;
+/* OVERLAY ESCURO */
+.map-card::before {
+  content:'';
+  position:absolute;
+  top:0; left:0;
+  width:100%; height:100%;
+  background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.2));
+  pointer-events: none;
 }
 
 /* NOME DO MAPA */
 .map-card h2 {
+  position: relative;
   margin:10px 0;
   font-size:1.2rem;
+  z-index:1;
 }
 
 /* BOTÕES DE LADO */
 .side-buttons {
+  position: relative;
+  z-index:1;
   display:flex;
   justify-content:center;
   gap:10px;
-  margin-bottom:15px;
+  margin-top: 20px;
 }
 .side-buttons button {
   padding:8px 15px;
@@ -65,12 +76,16 @@ h1 { margin-top:50px; font-size:3rem; text-shadow:2px 2px 5px #000; }
   font-weight:bold;
   transition:0.3s;
 }
-
-/* CT e TR cores diferentes */
 .side-buttons .ct { background:#1e90ff; color:#000; }
 .side-buttons .ct:hover { opacity:0.8; }
 .side-buttons .tr { background:#ff9d00; color:#fff; }
 .side-buttons .tr:hover { opacity:0.8; }
+
+/* HOVER NO CARD */
+.map-card:hover {
+  transform: translateY(-8px) scale(1.05);
+  box-shadow: 0 0 20px #ff9d00;
+}
 </style>
 </head>
 <body>
@@ -78,18 +93,25 @@ h1 { margin-top:50px; font-size:3rem; text-shadow:2px 2px 5px #000; }
 <div class="map-container" id="maps"></div>
 
 <script>
-fetch("data.json")
+// Nome do JSON personalizado
+const mapsArquivo = "mapsData.json"; // pode mudar para outro nome
+fetch(mapsArquivo)
 .then(res => res.json())
-.then(data => {
+.then(meusMaps => { // variável personalizada
   const container = document.getElementById("maps");
-  Object.keys(data.maps).forEach(map => {
+  
+  Object.keys(meusMaps.maps).forEach(mapNome => {
     const card = document.createElement('div');
     card.className = 'map-card';
+    
+    // Define a imagem de fundo do card
+    card.style.backgroundImage = `url('${meusMaps.maps[mapNome].image}')`;
+    
     card.innerHTML = `
-      <h2>${map.toUpperCase()}</h2>
+      <h2>${mapNome.toUpperCase()}</h2>
       <div class="side-buttons">
-        <button class="tr" onclick="window.location='tr.html?map=${map}'">TR</button>
-        <button class="ct" onclick="window.location='ct.html?map=${map}'">CT</button>
+        <button class="tr" onclick="window.location='tr.html?map=${mapNome}'">TR</button>
+        <button class="ct" onclick="window.location='ct.html?map=${mapNome}'">CT</button>
       </div>
     `;
     container.appendChild(card);

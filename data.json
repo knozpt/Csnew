@@ -6,7 +6,9 @@
           "side": "CT",
           "name": "Smoke Long Doors",
           "description": "Smoke para bloquear a visão da Long Doors.",
-          "images": ["https://wallpapers.com/images/featured-full/imagens-muito-legais-40it5k0y58kfe71d.jpg", "https://i.imgur.com/2.jpg"]
+          "images": ["https://wallpapers.com/images/featured-full/imagens-muito-legais-40it5k0y58kfe71d.jpg", 
+                      "https://i.imgur.com/2.jpg"
+          ]
         },
         {
           "side": "TR",

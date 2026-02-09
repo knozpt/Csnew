@@ -15,7 +15,7 @@
           "images": [
             "https://dc615.4shared.com/img/S3bo6N3vjq/s24/19c3fe306e8/smoke_mid_door__1_?async&rand=0.722702499362239",
             "https://dc615.4shared.com/img/ux7ess17ge/s24/19c3fe30ad0/smoke_mid_door__2_?async&rand=0.5623312784052622"
-             ]
+          ]
         }
       ],
       "flash": [
@@ -88,6 +88,182 @@
           "name": "Molotov Arch",
           "description": "Molotov para forçar saída do Arch.",
           "images": ["https://i.imgur.com/13.jpg"]
+        }
+      ]
+    },
+    "nuke": {
+      "smokes": [
+        {
+          "side": "CT",
+          "name": "Smoke Outside",
+          "description": "Bloqueia a visão da Outside.",
+          "images": ["https://i.imgur.com/nuke_smoke1.jpg"]
+        },
+        {
+          "side": "TR",
+          "name": "Smoke Heaven",
+          "description": "Smoke para entrar no Heaven.",
+          "images": ["https://i.imgur.com/nuke_smoke2.jpg"]
+        }
+      ],
+      "flash": [
+        {
+          "side": "CT",
+          "name": "Flash Ramp",
+          "description": "Flash para defender Ramp.",
+          "images": ["https://i.imgur.com/nuke_flash1.jpg"]
+        },
+        {
+          "side": "TR",
+          "name": "Flash Lobby",
+          "description": "Flash para avançar pelo Lobby.",
+          "images": ["https://i.imgur.com/nuke_flash2.jpg"]
+        }
+      ],
+      "molotov": [
+        {
+          "side": "CT",
+          "name": "Molotov Hut",
+          "description": "Molotov para impedir push do Hut.",
+          "images": ["https://i.imgur.com/nuke_molotov1.jpg"]
+        },
+        {
+          "side": "TR",
+          "name": "Molotov Garage",
+          "description": "Molotov para forçar saída do Garage.",
+          "images": ["https://i.imgur.com/nuke_molotov2.jpg"]
+        }
+      ]
+    },
+    "mirage": {
+      "smokes": [
+        {
+          "side": "CT",
+          "name": "Smoke Top Mid",
+          "description": "Bloqueia visão do Top Mid.",
+          "images": ["https://i.imgur.com/mirage_smoke1.jpg"]
+        },
+        {
+          "side": "TR",
+          "name": "Smoke A Site",
+          "description": "Smoke para entrar no A Site.",
+          "images": ["https://i.imgur.com/mirage_smoke2.jpg"]
+        }
+      ],
+      "flash": [
+        {
+          "side": "CT",
+          "name": "Flash Jungle",
+          "description": "Flash para defender Jungle.",
+          "images": ["https://i.imgur.com/mirage_flash1.jpg"]
+        },
+        {
+          "side": "TR",
+          "name": "Flash Connector",
+          "description": "Flash para avançar pelo Connector.",
+          "images": ["https://i.imgur.com/mirage_flash2.jpg"]
+        }
+      ],
+      "molotov": [
+        {
+          "side": "CT",
+          "name": "Molotov Stairs",
+          "description": "Molotov para impedir push das Stairs.",
+          "images": ["https://i.imgur.com/mirage_molotov1.jpg"]
+        },
+        {
+          "side": "TR",
+          "name": "Molotov Palace",
+          "description": "Molotov para limpar o Palace.",
+          "images": ["https://i.imgur.com/mirage_molotov2.jpg"]
+        }
+      ]
+    },
+    "ancient": {
+      "smokes": [
+        {
+          "side": "CT",
+          "name": "Smoke Mid",
+          "description": "Bloqueia visão do Mid.",
+          "images": ["https://i.imgur.com/ancient_smoke1.jpg"]
+        },
+        {
+          "side": "TR",
+          "name": "Smoke Bombsite A",
+          "description": "Smoke para entrar no Bombsite A.",
+          "images": ["https://i.imgur.com/ancient_smoke2.jpg"]
+        }
+      ],
+      "flash": [
+        {
+          "side": "CT",
+          "name": "Flash B Site",
+          "description": "Flash para defender B Site.",
+          "images": ["https://i.imgur.com/ancient_flash1.jpg"]
+        },
+        {
+          "side": "TR",
+          "name": "Flash Mid",
+          "description": "Flash para avançar pelo Mid.",
+          "images": ["https://i.imgur.com/ancient_flash2.jpg"]
+        }
+      ],
+      "molotov": [
+        {
+          "side": "CT",
+          "name": "Molotov Ramp",
+          "description": "Molotov para impedir push do Ramp.",
+          "images": ["https://i.imgur.com/ancient_molotov1.jpg"]
+        },
+        {
+          "side": "TR",
+          "name": "Molotov A Site",
+          "description": "Molotov para limpar A Site.",
+          "images": ["https://i.imgur.com/ancient_molotov2.jpg"]
+        }
+      ]
+    },
+    "anubis": {
+      "smokes": [
+        {
+          "side": "CT",
+          "name": "Smoke Mid",
+          "description": "Bloqueia visão do Mid.",
+          "images": ["https://i.imgur.com/anubis_smoke1.jpg"]
+        },
+        {
+          "side": "TR",
+          "name": "Smoke A Site",
+          "description": "Smoke para entrar no A Site.",
+          "images": ["https://i.imgur.com/anubis_smoke2.jpg"]
+        }
+      ],
+      "flash": [
+        {
+          "side": "CT",
+          "name": "Flash B Site",
+          "description": "Flash para defender B Site.",
+          "images": ["https://i.imgur.com/anubis_flash1.jpg"]
+        },
+        {
+          "side": "TR",
+          "name": "Flash Connector",
+          "description": "Flash para avançar pelo Connector.",
+          "images": ["https://i.imgur.com/anubis_flash2.jpg"]
+        }
+      ],
+      "molotov": [
+        {
+          "side": "CT",
+          "name": "Molotov Mid",
+          "description": "Molotov para impedir push do Mid.",
+          "images": ["https://i.imgur.com/anubis_molotov1.jpg"]
+        },
+        {
+          "side": "TR",
+          "name": "Molotov A Site",
+          "description": "Molotov para limpar A Site.",
+          "images": ["https://i.imgur.com/anubis_molotov2.jpg"]
         }
       ]
     }

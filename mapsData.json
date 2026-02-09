@@ -3,16 +3,25 @@
     "dust2": {
       "image": "https://cdn.sanity.io/images/6znhzi10/production/535ae2f23c94d17d63a520bd6e8ef4270f669ce4-2560x1550.jpg?w=768&auto=format"
     },
-    "mirage": {
+    "inferno": {
       "image": "https://i.imgur.com/mirage.jpg"
     },
-    "inferno": {
+    "mirage": {
       "image": "https://i.imgur.com/inferno.jpg"
     },
     "nuke": {
       "image": "https://i.imgur.com/nuke.jpg"
     },
+    "overpass": {
+      "image": "https://i.imgur.com/vertigo.jpg"
+    },
     "vertigo": {
+      "image": "https://i.imgur.com/vertigo.jpg"
+    },
+    "ancient": {
+      "image": "https://i.imgur.com/vertigo.jpg"
+    },
+    "anubis": {
       "image": "https://i.imgur.com/vertigo.jpg"
     }
   }

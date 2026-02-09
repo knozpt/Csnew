@@ -82,7 +82,7 @@ function renderItems(type){
 }
 
 function openModal(itemIndex,imageIndex){
-  const items = (dataGlobal.maps[map][currentType]||[]).filter(i=>i.side==='CT');
+  const items = (dataGlobal.maps[map][currentType]||[]).filter(i=>i.side==='TR');
   currentImages = items[itemIndex].images;
   currentIndex=imageIndex;
   document.getElementById('imageModal').style.display='flex';

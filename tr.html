@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SPAM CS2 - TR</title>
+<style>
+body { font-family:'Segoe UI',sans-serif; background:#111; color:#fff; padding:20px; }
+h1,h2{text-align:center;}
+.tabs { display:flex; justify-content:center; gap:10px; margin:20px 0;}
+.tab { padding:10px 20px; background:#222; border-radius:8px; cursor:pointer; }
+.tab.active { background:#1e90ff; color:black; }
+.items { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:15px; max-width:1100px; margin:auto; }
+.card { background:#1a1a1a; border-radius:12px; overflow:hidden; border:2px solid #1e90ff; transition:0.3s;}
+.card:hover { transform:scale(1.03); box-shadow:0 0 15px #1e90ff33;}
+.card-images { display:flex; gap:5px; }
+.card-images img { width:50%; height:200px; object-fit:cover; cursor:pointer; }
+.card-content { padding:10px; }
+.card-content h4 { margin:0; color:#ff9d00; }
+.card-content p { margin:5px 0; }
+.image-modal { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.95); justify-content:center; align-items:center; z-index:999; }
+.image-modal img { max-width:90%; max-height:90%; border-radius:12px; transition:transform 0.2s; }
+.close-btn { position:absolute; top:20px; right:30px; font-size:2rem; cursor:pointer; }
+.arrow { position:absolute; top:50%; transform:translateY(-50%); font-size:3rem; cursor:pointer; user-select:none; }
+.arrow.left { left:30px; }
+.arrow.right { right:30px; }
+.back-btn { margin-top:40px; text-align:center; cursor:pointer; color:#ff6600; }
+</style>
+</head>
+<body>
+<h1 id="mapName"></h1>
+<div class="tabs">
+  <div class="tab active" onclick="changeType('smokes', this)">Smokes</div>
+  <div class="tab" onclick="changeType('flash', this)">Flash</div>
+  <div class="tab" onclick="changeType('molotov', this)">Molotov</div>
+</div>
+<div class="items" id="items"></div>
+<div class="back-btn" onclick="window.history.back()">← Voltar</div>
+
+<div class="image-modal" id="imageModal">
+  <span class="close-btn" onclick="closeModal()">✕</span>
+  <span class="arrow left" onclick="changeImage(-1)">❮</span>
+  <img id="modalImg">
+  <span class="arrow right" onclick="changeImage(1)">❯</span>
+</div>
+
+<script>
+let dataGlobal, currentType='smokes', currentImages=[], currentIndex=0, scale=1;
+const params = new URLSearchParams(window.location.search);
+const map = params.get('map');
+document.getElementById('mapName').innerText = map.toUpperCase();
+
+fetch("data.json")
+.then(res=>res.json())
+.then(data=>{
+  dataGlobal=data;
+  renderItems(currentType);
+});
+
+function changeType(type, el){
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  el.classList.add('active');
+  currentType=type;
+  renderItems(type);
+}
+
+function renderItems(type){
+  const container = document.getElementById('items');
+  const items = (dataGlobal.maps[map][type]||[]).filter(i=>i.side==='TR');
+  if(!items.length){ container.innerHTML="<p style='text-align:center;'>Nenhum conteúdo</p>"; return; }
+  container.innerHTML = items.map((item,i)=>`
+    <div class="card">
+      <div class="card-images">
+        ${item.images.map((img,j)=>`<img src="${img}" onclick="openModal(${i},${j})">`).join('')}
+      </div>
+      <div class="card-content">
+        <h4>${item.name}</h4>
+        <p>${item.description}</p>
+      </div>
+    </div>
+  `).join('');
+}
+
+function openModal(itemIndex,imageIndex){
+  const items = (dataGlobal.maps[map][currentType]||[]).filter(i=>i.side==='CT');
+  currentImages = items[itemIndex].images;
+  currentIndex=imageIndex;
+  document.getElementById('imageModal').style.display='flex';
+  document.getElementById('modalImg').src=currentImages[currentIndex];
+  scale=1;
+  document.getElementById('modalImg').style.transform='scale(1)';
+}
+function closeModal(){ document.getElementById('imageModal').style.display='none'; }
+function changeImage(dir){
+  currentIndex+=dir;
+  if(currentIndex<0) currentIndex=currentImages.length-1;
+  if(currentIndex>=currentImages.length) currentIndex=0;
+  document.getElementById('modalImg').src=currentImages[currentIndex];
+}
+
+document.addEventListener("keydown", e=>{
+  const modal=document.getElementById("imageModal");
+  if(modal.style.display==="flex"){
+    if(e.key==="Escape") closeModal();
+    if(e.key==="ArrowRight") changeImage(1);
+    if(e.key==="ArrowLeft") changeImage(-1);
+  }
+});
+document.getElementById("modalImg").addEventListener("wheel", e=>{
+  e.preventDefault(); scale+=e.deltaY*-0.001; scale=Math.min(Math.max(1,scale),4);
+  e.target.style.transform=`scale(${scale})`;
+});
+document.getElementById("modalImg").addEventListener("dblclick", e=>{
+  scale=1; e.target.style.transform=`scale(1)`;
+});
+document.getElementById("imageModal").addEventListener("click", e=>{
+  if(e.target.id==="imageModal") closeModal();
+});
+</script>
+</body>
+</html>

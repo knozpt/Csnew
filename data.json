@@ -19,7 +19,115 @@
       "flash": [{
         "name": "",
         "description": "",
-        "image": ""
+        "image": ""{
+  "maps": {
+    "dust2": {
+      "smokes": [
+        {
+          "name": "Smoke Long",
+          "images": [
+            "https://placeimg.com/400/250/any",
+            "https://placeimg.com/401/250/any"
+          ],
+          "description": "Smoke para bloquear a visão de Long A."
+        },
+        {
+          "name": "Smoke Mid",
+          "images": [
+            "https://placeimg.com/402/250/any",
+            "https://placeimg.com/403/250/any"
+          ],
+          "description": "Smoke para bloquear a visão do Mid."
+        }
+      ],
+      "flash": [
+        {
+          "name": "Flash B",
+          "images": [
+            "https://placeimg.com/404/250/any",
+            "https://placeimg.com/405/250/any"
+          ],
+          "description": "Flash para entrar no B site."
+        }
+      ],
+      "molotov": [
+        {
+          "name": "Molotov A",
+          "images": [
+            "https://placeimg.com/406/250/any",
+            "https://placeimg.com/407/250/any"
+          ],
+          "description": "Molotov para limpar posição do A site."
+        }
+      ]
+    },
+    "mirage": {
+      "smokes": [
+        {
+          "name": "Smoke Window",
+          "images": [
+            "https://placeimg.com/408/250/any",
+            "https://placeimg.com/409/250/any"
+          ],
+          "description": "Smoke para bloquear a visão da Window."
+        }
+      ],
+      "flash": [
+        {
+          "name": "Flash Jungle",
+          "images": [
+            "https://placeimg.com/410/250/any",
+            "https://placeimg.com/411/250/any"
+          ],
+          "description": "Flash para entrar na Jungle."
+        }
+      ],
+      "molotov": [
+        {
+          "name": "Molotov Default",
+          "images": [
+            "https://placeimg.com/412/250/any",
+            "https://placeimg.com/413/250/any"
+          ],
+          "description": "Molotov para limpar Default no A site."
+        }
+      ]
+    },
+    "inferno": {
+      "smokes": [
+        {
+          "name": "Smoke Banana",
+          "images": [
+            "https://placeimg.com/414/250/any",
+            "https://placeimg.com/415/250/any"
+          ],
+          "description": "Smoke para bloquear visão da Banana."
+        }
+      ],
+      "flash": [
+        {
+          "name": "Flash B",
+          "images": [
+            "https://placeimg.com/416/250/any",
+            "https://placeimg.com/417/250/any"
+          ],
+          "description": "Flash para entrar no B site."
+        }
+      ],
+      "molotov": [
+        {
+          "name": "Molotov Pit",
+          "images": [
+            "https://placeimg.com/418/250/any",
+            "https://placeimg.com/419/250/any"
+          ],
+          "description": "Molotov para limpar Pit do B site."
+        }
+      ]
+    }
+  }
+}
+
       },
       {
         "name": "",

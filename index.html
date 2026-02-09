@@ -161,32 +161,6 @@ h1, h2 {
   }
 }
 
-/* ===== LIGHTBOX ===== */
-
-.lightbox {
-  display: none;
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.9);
-  justify-content: center;
-  align-items: center;
-  z-index: 9999;
-  cursor: zoom-out;
-}
-
-.lightbox img {
-  max-width: 90%;
-  max-height: 90%;
-  border-radius: 12px;
-  box-shadow: 0 0 30px #000;
-  animation: zoomIn 0.3s ease;
-}
-
-@keyframes zoomIn {
-  from { transform: scale(0.8); opacity: 0; }
-  to { transform: scale(1); opacity: 1; }
-}
-
 </style>
 </head>
 <body>
@@ -254,7 +228,7 @@ function renderItems(map, type) {
 
 itemsContainer.innerHTML = items.map(item => `
     <div class="card">
-      <img src="${img}" alt="${item.name}" onclick="openLightbox('${img}')">
+      <img src="${item.image}" alt="${item.name}">
       <div class="card-content">
         <h3>${item.name}</h3>
         <p>${item.description}</p>
@@ -270,26 +244,8 @@ showHome();
   document.getElementById("app").innerHTML = "Erro ao carregar JSON.";
   console.error(err);
 });
-function openLightbox(src) {
-  const lightbox = document.getElementById("lightbox");
-  const img = document.getElementById("lightbox-img");
-  img.src = src;
-  lightbox.style.display = "flex";
-}
 
-function closeLightbox() {
-  document.getElementById("lightbox").style.display = "none";
-}
-
-/* Fechar com ESC */
-document.addEventListener("keydown", function(e) {
-  if (e.key === "Escape") {
-    closeLightbox();
-  }
-});
 </script>
-<div id="lightbox" class="lightbox" onclick="closeLightbox()">
-  <img id="lightbox-img" src="">
-</div>
+
 </body>
 </html>

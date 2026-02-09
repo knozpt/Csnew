@@ -1,14 +1,15 @@
 {
   "maps": {
-    "dust2": {
+    "dust2": { "image" : "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9c/Counter_Strike_2_Logo.png/250px-Counter_Strike_2_Logo.png",
       "smokes": [
         {
           "side": "CT",
           "name": "Smoke Long Doors",
           "description": "Smoke para bloquear a visão da Long Doors.",
+
           "images": [
                     "", 
-                    "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9c/Counter_Strike_2_Logo.png/250px-Counter_Strike_2_Logo.png"
+                    ""
           ]
         },
         {

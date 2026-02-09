@@ -78,22 +78,22 @@ h1 { margin-top:50px; font-size:3rem; text-shadow:2px 2px 5px #000; }
 <div class="map-container" id="maps"></div>
 
 <script>
-fetch("data.json")
-.then(res => res.json())
-.then(data => {
-  const container = document.getElementById("maps");
-  Object.keys(data.maps).forEach(map => {
-    const card = document.createElement('div');
-    card.className = 'map-card';
-    card.innerHTML = `
-      <h2>${map.toUpperCase()}</h2>
-      <div class="side-buttons">
-        <button class="tr" onclick="window.location='tr.html?map=${map}'">TR</button>
-        <button class="ct" onclick="window.location='ct.html?map=${map}'">CT</button>
-      </div>
-    `;
-    container.appendChild(card);
-  });
+Object.keys(data.maps).forEach(map => {
+  const card = document.createElement('div');
+  card.className = 'map-card';
+  card.style.background = `
+    linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)),
+    url('${data.maps[map].image}') no-repeat center center
+  `;
+  card.style.backgroundSize = 'cover';
+  card.innerHTML = `
+    <h2>${map.toUpperCase()}</h2>
+    <div class="side-buttons">
+      <button class="tr" onclick="window.location='tr.html?map=${map}'">TR</button>
+      <button class="ct" onclick="window.location='ct.html?map=${map}'">CT</button>
+    </div>
+  `;
+  container.appendChild(card);
 });
 </script>
 </body>

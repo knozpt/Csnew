@@ -249,7 +249,16 @@ itemsContainer.innerHTML = items.map(item => {
       </div>
     `;
   }
-
+return `
+    <div class="card">
+      ${imagesHTML}
+      <div class="card-content">
+        <h3>${item.name}</h3>
+        <p>${item.description}</p>
+      </div>
+    </div>
+  `;
+}).join('');
 showHome();
 
 })

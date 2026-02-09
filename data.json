@@ -6,8 +6,9 @@
           "side": "CT",
           "name": "Smoke Long Doors",
           "description": "Smoke para bloquear a visão da Long Doors.",
-          "images": ["https://wallpapers.com/images/featured-full/imagens-muito-legais-40it5k0y58kfe71d.jpg", 
-                      "https://i.imgur.com/2.jpg"
+          "images": [
+                    "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9c/Counter_Strike_2_Logo.png/250px-Counter_Strike_2_Logo.png", 
+                    "https://i.imgur.com/2.jpg"
           ]
         },
         {

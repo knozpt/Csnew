@@ -91,6 +91,50 @@
         }
       ]
     },
+    "mirage": {
+      "smokes": [
+        {
+          "side": "CT",
+          "name": "Smoke Outside",
+          "description": "Bloqueia a visão da Outside.",
+          "images": ["https://i.imgur.com/nuke_smoke1.jpg"]
+        },
+        {
+          "side": "TR",
+          "name": "Smoke Heaven",
+          "description": "Smoke para entrar no Heaven.",
+          "images": ["https://i.imgur.com/nuke_smoke2.jpg"]
+        }
+      ],
+      "flash": [
+        {
+          "side": "CT",
+          "name": "Flash Ramp",
+          "description": "Flash para defender Ramp.",
+          "images": ["https://i.imgur.com/nuke_flash1.jpg"]
+        },
+        {
+          "side": "TR",
+          "name": "Flash Lobby",
+          "description": "Flash para avançar pelo Lobby.",
+          "images": ["https://i.imgur.com/nuke_flash2.jpg"]
+        }
+      ],
+      "molotov": [
+        {
+          "side": "CT",
+          "name": "Molotov Hut",
+          "description": "Molotov para impedir push do Hut.",
+          "images": ["https://i.imgur.com/nuke_molotov1.jpg"]
+        },
+        {
+          "side": "TR",
+          "name": "Molotov Garage",
+          "description": "Molotov para forçar saída do Garage.",
+          "images": ["https://i.imgur.com/nuke_molotov2.jpg"]
+        }
+      ]
+    },
     "nuke": {
       "smokes": [
         {
@@ -135,7 +179,7 @@
         }
       ]
     },
-    "mirage": {
+    "overpass": {
       "smokes": [
         {
           "side": "CT",

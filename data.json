@@ -1,33 +1,12 @@
 {
   "maps": {
-    "inferno": {
-      "smokes": [
-        {
-        "name": "1Banana Smoke",
-        "images": [
-          "https://dc704.4shared.com/img/QC6EVBmtjq/s24/19c3b407918/1213?async&rand=0.5746069611170083",
-          "https://wallpapers.com/images/featured-full/imagens-muito-legais-40it5k0y58kfe71d.jpg"
-        ],
-       "description": "test"
-      },
-      {
-        "name": "1",
-        "description": "1",
-        "image": "https://wallpapers.com/images/featured-full/imagens-muito-legais-40it5k0y58kfe71d.jpg"
-      }
-      ],
-      "flash": [{
-        "name": "",
-        "description": "",
-        "image": ""{
-  "maps": {
     "dust2": {
       "smokes": [
         {
           "name": "Smoke Long",
           "images": [
-            "https://placeimg.com/400/250/any",
-            "https://placeimg.com/401/250/any"
+            "https://dc704.4shared.com/img/QC6EVBmtjq/s24/19c3b407918/1213?async&rand=0.9095253111764205",
+            "https://wallpapers.com/images/featured-full/imagens-muito-legais-40it5k0y58kfe71d.jpg"
           ],
           "description": "Smoke para bloquear a visão de Long A."
         },
@@ -124,28 +103,6 @@
           "description": "Molotov para limpar Pit do B site."
         }
       ]
-    }
-  }
-}
-
-      },
-      {
-        "name": "",
-        "description": "",
-        "image": ""
-      }
-    ],
-      "molotov": []
-    },
-    "mirage": {
-      "smokes": [],
-      "flash": [],
-      "molotov": []
-    },
-    "d2": {
-      "smokes": [],
-      "flash": [],
-      "molotov": []
     }
   }
 }

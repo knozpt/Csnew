@@ -44,16 +44,6 @@ h1 { margin-top:50px; font-size:3rem; text-shadow:2px 2px 5px #000; }
   box-shadow: 0 0 20px #ff9d00;
 }
 
-/* IMAGEM DO MAPA */
-.map-card img.map-img {
-  width: 100%;
-  height: 120px;
-  object-fit: cover;
-  cursor: pointer;
-  transition: transform 0.3s ease;
-  border-bottom: 2px solid #333;
-}
-
 /* NOME DO MAPA */
 .map-card h2 {
   margin:10px 0;
@@ -75,43 +65,17 @@ h1 { margin-top:50px; font-size:3rem; text-shadow:2px 2px 5px #000; }
   font-weight:bold;
   transition:0.3s;
 }
+
+/* CT e TR cores diferentes */
 .side-buttons .ct { background:#1e90ff; color:#000; }
 .side-buttons .ct:hover { opacity:0.8; }
 .side-buttons .tr { background:#ff9d00; color:#fff; }
 .side-buttons .tr:hover { opacity:0.8; }
-
-/* MODAL */
-.modal {
-  display:none;
-  position:fixed;
-  top:0; left:0;
-  width:100%; height:100%;
-  background: rgba(0,0,0,0.9);
-  justify-content:center;
-  align-items:center;
-  z-index:100;
-  cursor: pointer;
-}
-
-.modal img {
-  max-width:90%;
-  max-height:90%;
-  border: 5px solid #fff;
-  border-radius: 15px;
-  box-shadow: 0 0 20px #ff9d00;
-  transition: transform 0.3s;
-}
-
 </style>
 </head>
 <body>
 <h1>SPAM CS2</h1>
 <div class="map-container" id="maps"></div>
-
-<!-- MODAL -->
-<div class="modal" id="modal">
-  <img src="" alt="Mapa Zoom" id="modal-img">
-</div>
 
 <script>
 fetch("data.json")
@@ -119,11 +83,9 @@ fetch("data.json")
 .then(data => {
   const container = document.getElementById("maps");
   Object.keys(data.maps).forEach(map => {
-    const mapData = data.maps[map];
     const card = document.createElement('div');
     card.className = 'map-card';
     card.innerHTML = `
-      <img src="${mapData.img}" alt="${map}" class="map-img">
       <h2>${map.toUpperCase()}</h2>
       <div class="side-buttons">
         <button class="tr" onclick="window.location='tr.html?map=${map}'">TR</button>
@@ -132,23 +94,6 @@ fetch("data.json")
     `;
     container.appendChild(card);
   });
-});
-
-// Modal para zoom
-const modal = document.getElementById('modal');
-const modalImg = document.getElementById('modal-img');
-
-document.addEventListener('click', function(e) {
-  // Abrir modal
-  if (e.target.classList.contains('map-img')) {
-    modal.style.display = 'flex';
-    modalImg.src = e.target.src;
-  }
-  // Fechar modal ao clicar fora da imagem
-  else if (e.target === modal) {
-    modal.style.display = 'none';
-    modalImg.src = '';
-  }
 });
 </script>
 </body>

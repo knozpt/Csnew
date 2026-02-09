@@ -17,7 +17,15 @@ body {
   min-height:100vh;
 }
 
-h1 { margin-top:50px; font-size:3rem; text-shadow:2px 2px 5px #000; }
+h1 { 
+  margin-top:50px; 
+  font-size:4rem; /* aumentei de 3rem para 4rem */
+  text-shadow: 2px 2px 5px #000; 
+  word-wrap: break-word; /* garante que o texto quebre linha se necessário */
+  max-width: 90%; /* evita que ultrapasse a tela */
+  margin-left: auto;
+  margin-right: auto;
+}
 
 /* CONTAINER DE MAPAS */
 .map-container {

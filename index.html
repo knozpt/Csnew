@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Spam CS2</title>
+<title>Spam CS2 - Lados Lado a Lado</title>
 
 <style>
 body {
@@ -63,12 +63,12 @@ h1, h2 {
   box-shadow: 0 0 15px #ff660055;
 }
 
-/* TABS */
+/* TYPE TABS */
 .tabs {
   display: flex;
   justify-content: center;
   gap: 15px;
-  margin: 30px 0;
+  margin: 20px 0;
 }
 
 .tab {
@@ -85,13 +85,36 @@ h1, h2 {
   color: black;
 }
 
-/* GRID */
+/* LAYOUT DUAS COLUNAS */
+.columns {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  max-width: 1200px;
+  margin: auto;
+}
+
+.column {
+  background: #1a1a1a;
+  border-radius: 12px;
+  padding: 15px;
+  border: 2px solid #2a2a2a;
+}
+
+.column h3 {
+  text-align: center;
+  margin-top: 0;
+}
+
+.column.ct { border-color: #1e90ff; } /* azul CT */
+.column.tr { border-color: #ff4d4d; } /* vermelho TR */
+
+/* GRID DE CARDS DENTRO DAS COLUNAS */
 .items {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 20px;
-  max-width: 1100px;
-  margin: auto;
+  grid-template-columns: 1fr;
+  gap: 15px;
+  margin-top: 10px;
 }
 
 /* CARD */
@@ -99,9 +122,12 @@ h1, h2 {
   background: #1a1a1a;
   border-radius: 12px;
   overflow: hidden;
-  border: 1px solid #2a2a2a;
+  border: 2px solid #2a2a2a;
   transition: 0.3s;
 }
+
+.card.ct { border-color: #1e90ff; }
+.card.tr { border-color: #ff4d4d; }
 
 .card:hover {
   transform: scale(1.03);
@@ -115,15 +141,15 @@ h1, h2 {
 
 .card-images img {
   width: 50%;
-  height: 250px;
+  height: 200px;
   object-fit: cover;
   cursor: pointer;
 }
 
-.card-content { padding: 15px; }
+.card-content { padding: 10px; }
 
-.card h3 {
-  margin-top: 0;
+.card-content h4 {
+  margin: 0;
   color: #ff9d00;
 }
 
@@ -190,6 +216,7 @@ let dataGlobal;
 let currentImages = [];
 let currentIndex = 0;
 let scale = 1;
+let currentType = 'smokes';
 
 fetch("data.json")
 .then(res => res.json())
@@ -198,6 +225,7 @@ fetch("data.json")
   showHome();
 });
 
+// === HOME ===
 function showHome() {
   const app = document.getElementById("app");
   app.innerHTML = `
@@ -213,102 +241,112 @@ function showHome() {
   `;
 }
 
+// === SHOW MAP ===
 function showMap(map) {
   const app = document.getElementById("app");
   app.innerHTML = `
     <h2>${map}</h2>
-    <div class="tabs">
-      <div class="tab active" onclick="changeTab('${map}','smokes', this)">Smokes</div>
-      <div class="tab" onclick="changeTab('${map}','flash', this)">Flash</div>
-      <div class="tab" onclick="changeTab('${map}','molotov', this)">Molotov</div>
+    <div class="tabs" id="typeTabs">
+      <div class="tab active" onclick="changeType('${map}','smokes', this)">Smokes</div>
+      <div class="tab" onclick="changeType('${map}','flash', this)">Flash</div>
+      <div class="tab" onclick="changeType('${map}','molotov', this)">Molotov</div>
     </div>
-    <div class="items" id="items"></div>
+    <div class="columns">
+      <div class="column ct">
+        <h3>CT</h3>
+        <div class="items" id="itemsCT"></div>
+      </div>
+      <div class="column tr">
+        <h3>TR</h3>
+        <div class="items" id="itemsTR"></div>
+      </div>
+    </div>
     <div class="back-btn" onclick="showHome()">← Voltar</div>
   `;
-  renderItems(map, "smokes");
+  currentType = 'smokes';
+  renderColumns(map, currentType);
 }
 
-function changeTab(map, type, el) {
-  document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
+// === CHANGE TYPE ===
+function changeType(map, type, el) {
+  document.querySelectorAll("#typeTabs .tab").forEach(t => t.classList.remove("active"));
   el.classList.add("active");
-  renderItems(map, type);
+  currentType = type;
+  renderColumns(map, type);
 }
 
-function renderItems(map, type) {
-  const container = document.getElementById("items");
-  const items = dataGlobal.maps[map][type];
+// === RENDER CT/TR ===
+function renderColumns(map, type) {
+  const containerCT = document.getElementById("itemsCT");
+  const containerTR = document.getElementById("itemsTR");
 
-  if (!items || items.length === 0) {
-    container.innerHTML = "<p style='text-align:center;'>Nenhum conteúdo ainda.</p>";
-    return;
-  }
+  const itemsCT = (dataGlobal.maps[map][type] || []).filter(i => i.side === 'CT');
+  const itemsTR = (dataGlobal.maps[map][type] || []).filter(i => i.side === 'TR');
 
-  container.innerHTML = items.map((item, i) => `
-    <div class="card">
+  containerCT.innerHTML = itemsCT.length ? itemsCT.map((item,i) => renderCard(item, i, 'CT')).join('') : '<p style="text-align:center;">Nenhum conteúdo</p>';
+  containerTR.innerHTML = itemsTR.length ? itemsTR.map((item,i) => renderCard(item, i, 'TR')).join('') : '<p style="text-align:center;">Nenhum conteúdo</p>';
+}
+
+// === RENDER CARD ===
+function renderCard(item, index, side) {
+  return `
+    <div class="card ${side.toLowerCase()}">
       <div class="card-images">
-        ${item.images.map((img, j) => `
-          <img src="${img}" onclick="openModal(${i}, ${j}, '${map}', '${type}')">
-        `).join('')}
+        ${item.images.map((img,j) => `<img src="${img}" onclick="openModalSide('${side}', ${index}, ${j}, currentType)">`).join('')}
       </div>
       <div class="card-content">
-        <h3>${item.name}</h3>
+        <h4>${item.name}</h4>
         <p>${item.description}</p>
       </div>
     </div>
-  `).join('');
+  `;
 }
 
-function openModal(itemIndex, imageIndex, map, type) {
-  currentImages = dataGlobal.maps[map][type][itemIndex].images;
+// === MODAL ===
+function openModalSide(side, itemIndex, imageIndex, type) {
+  const mapName = document.querySelector('h2').textContent;
+  currentImages = (dataGlobal.maps[mapName][type] || []).filter(i=>i.side===side)[itemIndex].images;
   currentIndex = imageIndex;
-
   const modal = document.getElementById("imageModal");
   const modalImg = document.getElementById("modalImg");
-
   modal.style.display = "flex";
   modalImg.src = currentImages[currentIndex];
   scale = 1;
   modalImg.style.transform = "scale(1)";
 }
 
-function closeModal() {
-  document.getElementById("imageModal").style.display = "none";
+function closeModal() { document.getElementById("imageModal").style.display="none"; }
+function changeImage(dir) {
+  currentIndex+=dir;
+  if(currentIndex<0) currentIndex=currentImages.length-1;
+  if(currentIndex>=currentImages.length) currentIndex=0;
+  document.getElementById("modalImg").src=currentImages[currentIndex];
 }
 
-function changeImage(direction) {
-  currentIndex += direction;
-  if (currentIndex < 0) currentIndex = currentImages.length - 1;
-  if (currentIndex >= currentImages.length) currentIndex = 0;
-  document.getElementById("modalImg").src = currentImages[currentIndex];
-}
-
-/* ESC + Teclas */
-document.addEventListener("keydown", e => {
-  const modal = document.getElementById("imageModal");
-  if (modal.style.display === "flex") {
-    if (e.key === "Escape") closeModal();
-    if (e.key === "ArrowRight") changeImage(1);
-    if (e.key === "ArrowLeft") changeImage(-1);
+// TECLAS & ZOOM
+document.addEventListener("keydown", e=>{
+  const modal=document.getElementById("imageModal");
+  if(modal.style.display==="flex"){
+    if(e.key==="Escape") closeModal();
+    if(e.key==="ArrowRight") changeImage(1);
+    if(e.key==="ArrowLeft") changeImage(-1);
   }
 });
 
-/* Scroll zoom */
-document.getElementById("modalImg").addEventListener("wheel", e => {
+document.getElementById("modalImg").addEventListener("wheel", e=>{
   e.preventDefault();
-  scale += e.deltaY * -0.001;
-  scale = Math.min(Math.max(1, scale), 4);
-  e.target.style.transform = `scale(${scale})`;
+  scale+=e.deltaY*-0.001;
+  scale=Math.min(Math.max(1,scale),4);
+  e.target.style.transform=`scale(${scale})`;
 });
 
-/* Double click reset */
-document.getElementById("modalImg").addEventListener("dblclick", e => {
-  scale = 1;
-  e.target.style.transform = "scale(1)";
+document.getElementById("modalImg").addEventListener("dblclick", e=>{
+  scale=1;
+  e.target.style.transform=`scale(1)`;
 });
 
-/* Click fora fecha */
-document.getElementById("imageModal").addEventListener("click", e => {
-  if (e.target.id === "imageModal") closeModal();
+document.getElementById("imageModal").addEventListener("click", e=>{
+  if(e.target.id==="imageModal") closeModal();
 });
 </script>
 

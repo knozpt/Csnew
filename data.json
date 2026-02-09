@@ -3,104 +3,100 @@
     "dust2": {
       "smokes": [
         {
-          "name": "Smoke Door Mid T Spwan",
-          "images": [
-            "https://dc349.4shared.com/img/S3bo6N3vjq/s24/19c3fe306e8/smoke_mid_door__1_?async&rand=0.1660406987035381",
-            "https://dc349.4shared.com/img/ux7ess17ge/s24/19c3fe30ad0/smoke_mid_door__2_?async&rand=0.5982716258515711"
-          ],
-          "description": "Jump + Left Click"
+          "side": "CT",
+          "name": "Smoke Long Doors",
+          "description": "Smoke para bloquear a visão da Long Doors.",
+          "images": ["https://i.imgur.com/1.jpg", "https://i.imgur.com/2.jpg"]
         },
         {
+          "side": "TR",
           "name": "Smoke Mid",
-          "images": [
-            "https://placeimg.com/402/250/any",
-            "https://placeimg.com/403/250/any"
-          ],
-          "description": "Smoke para bloquear a visão do Mid."
+          "description": "Smoke para cobrir o meio.",
+          "images": ["https://dc615.4shared.com/img/S3bo6N3vjq/s24/19c3fe306e8/smoke_mid_door__1_?async&rand=0.722702499362239",
+          "https://dc615.4shared.com/img/ux7ess17ge/s24/19c3fe30ad0/smoke_mid_door__2_?async&rand=0.5623312784052622"
+          ]
         }
       ],
       "flash": [
         {
-          "name": "Flash B",
-          "images": [
-            "https://placeimg.com/404/250/any",
-            "https://placeimg.com/405/250/any"
-          ],
-          "description": "Flash para entrar no B site."
+          "side": "CT",
+          "name": "Flash B Site",
+          "description": "Flash para entrar no bombsite B.",
+          "images": ["https://i.imgur.com/4.jpg"],
+          "date": "2026-02-07"
+        },
+        {
+          "side": "TR",
+          "name": "Flash Long Doors",
+          "description": "Flash para avançar na Long Doors.",
+          "images": ["https://i.imgur.com/5.jpg"],
+          "date": "2026-02-06"
         }
       ],
       "molotov": [
         {
-          "name": "Molotov A",
-          "images": [
-            "https://placeimg.com/406/250/any",
-            "https://placeimg.com/407/250/any"
-          ],
-          "description": "Molotov para limpar posição do A site."
-        }
-      ]
-    },
-    "mirage": {
-      "smokes": [
+          "side": "CT",
+          "name": "Molotov Car",
+          "description": "Molotov para impedir push em Car.",
+          "images": ["https://i.imgur.com/6.jpg"],
+          "date": "2026-02-05"
+        },
         {
-          "name": "Smoke Window",
-          "images": [
-            "https://placeimg.com/408/250/any",
-            "https://placeimg.com/409/250/any"
-          ],
-          "description": "Smoke para bloquear a visão da Window."
-        }
-      ],
-      "flash": [
-        {
-          "name": "Flash Jungle",
-          "images": [
-            "https://placeimg.com/410/250/any",
-            "https://placeimg.com/411/250/any"
-          ],
-          "description": "Flash para entrar na Jungle."
-        }
-      ],
-      "molotov": [
-        {
-          "name": "Molotov Default",
-          "images": [
-            "https://placeimg.com/412/250/any",
-            "https://placeimg.com/413/250/any"
-          ],
-          "description": "Molotov para limpar Default no A site."
+          "side": "TR",
+          "name": "Molotov Pit",
+          "description": "Molotov para limpar Pit.",
+          "images": ["https://i.imgur.com/7.jpg"],
+          "date": "2026-02-04"
         }
       ]
     },
     "inferno": {
       "smokes": [
         {
+          "side": "CT",
           "name": "Smoke Banana",
-          "images": [
-            "https://placeimg.com/414/250/any",
-            "https://placeimg.com/415/250/any"
-          ],
-          "description": "Smoke para bloquear visão da Banana."
+          "description": "Bloqueia visão da Banana.",
+          "images": ["https://i.imgur.com/8.jpg"],
+          "date": "2026-02-03"
+        },
+        {
+          "side": "TR",
+          "name": "Smoke Mid",
+          "description": "Smoke para cobrir o meio da Inferno.",
+          "images": ["https://i.imgur.com/9.jpg"],
+          "date": "2026-02-02"
         }
       ],
       "flash": [
         {
-          "name": "Flash B",
-          "images": [
-            "https://placeimg.com/416/250/any",
-            "https://placeimg.com/417/250/any"
-          ],
-          "description": "Flash para entrar no B site."
+          "side": "CT",
+          "name": "Flash A Site",
+          "description": "Flash para defender A Site.",
+          "images": ["https://i.imgur.com/10.jpg"],
+          "date": "2026-02-01"
+        },
+        {
+          "side": "TR",
+          "name": "Flash Banana",
+          "description": "Flash para entrar na Banana.",
+          "images": ["https://i.imgur.com/11.jpg"],
+          "date": "2026-01-31"
         }
       ],
       "molotov": [
         {
+          "side": "CT",
           "name": "Molotov Pit",
-          "images": [
-            "https://placeimg.com/418/250/any",
-            "https://placeimg.com/419/250/any"
-          ],
-          "description": "Molotov para limpar Pit do B site."
+          "description": "Molotov para impedir rush em Pit.",
+          "images": ["https://i.imgur.com/12.jpg"],
+          "date": "2026-01-30"
+        },
+        {
+          "side": "TR",
+          "name": "Molotov Arch",
+          "description": "Molotov para forçar saída do Arch.",
+          "images": ["https://i.imgur.com/13.jpg"],
+          "date": "2026-01-29"
         }
       ]
     }

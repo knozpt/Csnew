@@ -65,9 +65,9 @@
       "smokes": [
         {
           "side": "CT",
-          "name": "Smoke Banana",
+          "name": "Smoke CT",
           "description": "Bloqueia visão da Banana.",
-          "images": ["https://i.imgur.com/8.jpg"]
+          "images": [""]
         },
         {
           "side": "TR",

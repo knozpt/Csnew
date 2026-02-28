@@ -106,7 +106,7 @@
       ]
     },
     "mirage": {
-      "Smokes": [
+      "smokes": [
         {
           "side": "CT",
           "name": "Smoke Outside",

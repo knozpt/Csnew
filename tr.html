@@ -71,7 +71,9 @@ function renderItems(type){
   container.innerHTML = items.map((item,i)=>`
     <div class="card">
       <div class="card-images">
-        ${item.images.map((img,j)=>`<img src="${img}" onclick="openModal(${i},${j})">`).join('')}
+        ${item.images.slice(0,2).map((img,j)=>
+  `<img src="${img}" onclick="openModal(${i},${j})">`
+).join('')}
       </div>
       <div class="card-content">
         <h4>${item.name}</h4>

@@ -115,12 +115,6 @@
         },
         {
           "side": "TR",
-          "name": "Smoke Heaven",
-          "description": "Smoke para entrar no Heaven.",
-          "images": ["https://i.imgur.com/nuke_smoke2.jpg"]
-        },
-        {
-          "side": "TR",
           "name": "Smoke Window",
           "description": "Smoke para entrar no Heaven.",
           "images": ["https://i.imgur.com/CrA7eBW.jpeg",
